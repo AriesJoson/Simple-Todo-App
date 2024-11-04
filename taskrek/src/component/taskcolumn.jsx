@@ -2,13 +2,22 @@ import React from 'react'
 import '../css/taskcolumn.css'
 import TaskCard from './taskCard.jsx'
 
-const TaskColumn = (props) => {
+const TaskColumn = ({title, icon, tasks, status}) => {
     return (
         <section className='task-column'>
             <h2 className='task-column-heading'>
-                <img className='task-column-icon' src={props.icon} alt=''/>{props.title}
+                <img className='task-column-icon' src={icon} alt='' /> {title}
             </h2>
-            <TaskCard />
+            {tasks.map (
+                (task, index) => 
+                    task.status === status && (
+                    <TaskCard 
+                        key={index} 
+                        title={task.task} 
+                        tags={task.tags}
+                    />
+                )
+            )}
         </section>
     )
 }
